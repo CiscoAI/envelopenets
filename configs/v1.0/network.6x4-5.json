@@ -1,0 +1,115 @@
+{
+"parameters": {
+        "archname":"6x4-5",
+        "mode":"oneshot",
+        "algorithm": "deterministic",
+        "steps" : 10000,
+        "evalintval" : 1000,
+        "batchsize" : 50,
+        "dataset":"cifar10",
+        "iterations" : 5,
+        "image_size" : 32 
+},
+"random":{ 
+        "layers": 12, 
+        "numblocks": 24,
+        "blocks": ["3x3", "3x3sep", "5x5", "5x5sep"],
+        "maxwideners":4,
+        "minwidenerintval":4
+},
+"envelopenet":{ "layers": 6,
+        "envelopecell": {"Branch0": "3x3",
+            "Branch1": "3x3sep",
+            "Branch2": "5x5",
+            "Branch3": "5x5sep"
+        },
+        "maxfilterprune":4,
+        "maxwideners":4,
+        "minwidenerintval":4
+},
+"initcell": {
+    "Layer0": {"Branch0": {"block": "conv2d", "kernel_size": [3, 3], "outputs": 64}},
+    "Layer1": {"Branch0": {"block": "conv2d", "kernel_size": [1, 1], "outputs": 64}}
+},
+"classificationcell": {
+    "Layer0": {"Branch0": {"block": "reduce_mean", "size": [1, 2]}},
+    "Layer1": {"Branch0": {"block": "flatten", "size": [3, 3]}},
+    "Layer2": {"Branch0": {"block": "fc-final", "inputs": 192, "outputs": 10}}
+},
+"arch": [
+    {
+        "filters": {
+            "Branch0": "3x3"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3"
+        }
+    },
+    {
+        "widener": {}
+    },
+    {
+        "filters": {
+            "Branch0": "3x3",
+            "Branch1": "3x3sep",
+            "Branch2": "5x5",
+            "Branch3": "5x5sep"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3",
+            "Branch1": "3x3sep",
+            "Branch2": "5x5"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3",
+            "Branch2": "5x5"
+        }
+    },
+    {
+        "filters": {
+            "Branch2": "5x5"
+        }
+    },
+    {
+        "widener": {}
+    },
+    {
+        "filters": {
+            "Branch0": "3x3",
+            "Branch1": "3x3sep",
+            "Branch2": "5x5",
+            "Branch3": "5x5sep"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3",
+            "Branch2": "5x5"
+        }
+    },
+    {
+        "filters": {
+            "Branch0": "3x3",
+            "Branch1": "3x3sep",
+            "Branch2": "5x5",
+            "Branch3": "5x5sep"
+        }
+    }
+]
+}

@@ -1,0 +1,41 @@
+{
+"parameters": {
+        "archname":"cons-exp-3",
+        "mode":"construct",
+        "algorithm": "envelopenet",
+        "gpus":"[]",
+        "steps" : 10000,
+        "evalintval" : 1000,
+        "batchsize" : 50,
+        "dataset":"cifar10",
+        "iterations" : 5,
+        "image_size" : 28 
+},
+"envelopenet":{ "stages": 4,
+        "layersperstage": [10,1,1,1],
+        "maxlayersperstage": [15,5,3,3],
+        "construction": [true, true, true, true],
+        "parameterlimits": [false, false, false, false],
+        "maxfilterprune":6,
+        "envelopecell": {
+            "Branch1": "1x1",
+            "Branch2": "3x3",
+            "Branch3": "3x3sep",
+            "Branch4": "5x5",
+            "Branch5": "5x5sep",
+            "Branch6": "7x7sep"
+        },
+        "skip": false,
+        "worstcase": true 
+},
+"initcell": {
+    "Layer0": {"Branch0": {"block": "conv2d", "kernel_size": [1, 1], "outputs": 128}},
+    "Layer2": {"Branch0": {"block": "lrn" }}
+},
+"classificationcell": {
+    "Layer0": {"Branch0": {"block": "reduce_mean", "size": [1, 2]}},
+    "Layer1": {"Branch0": {"block": "flatten", "size": [3, 3]}},
+    "Layer2": {"Branch0": {"block": "dropout", "keep_prob": 0.8}},
+    "Layer3": {"Branch0": {"block": "fc-final", "inputs": 192, "outputs": 10}}
+}
+}

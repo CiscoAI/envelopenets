@@ -1,0 +1,306 @@
+{
+"parameters": {
+        "archname":"cons-exp-3-5-rnd1-longrun",
+        "mode":"oneshot",
+        "algorithm": "deterministic",
+        "gpus":"[0,1,2,3]",
+        "steps" : 100000,
+        "evalintval" : 5000,
+        "batchsize" : 50,
+        "dataset":"cifar10",
+        "iterations" : 5,
+        "image_size" : 28 
+},
+"envelopenet":{ "stages": 4,
+        "layersperstage": [10,1,1,1],
+        "maxlayersperstage": [15,5,3,3],
+        "construction": [true, true, true, true],
+        "parameterlimits": [false, false, false, false],
+        "maxfilterprune":6,
+        "envelopecell": {
+            "Branch1": "1x1",
+            "Branch2": "3x3",
+            "Branch3": "3x3sep",
+            "Branch4": "5x5",
+            "Branch5": "5x5sep",
+            "Branch6": "7x7sep"
+        },
+        "skip": false,
+        "worstcase": false
+},
+"initcell": {
+    "Layer0": {"Branch0": {"block": "conv2d", "kernel_size": [1, 1], "outputs": 128}},
+    "Layer2": {"Branch0": {"block": "lrn" }}
+},
+"classificationcell": {
+    "Layer0": {"Branch0": {"block": "reduce_mean", "size": [1, 2]}},
+    "Layer1": {"Branch0": {"block": "flatten", "size": [3, 3]}},
+    "Layer2": {"Branch0": {"block": "dropout", "keep_prob": 0.8}},
+    "Layer3": {"Branch0": {"block": "fc-final", "inputs": 192, "outputs": 10}}
+},
+"arch":
+[
+    {
+        "filters": {
+            "Branch0": "7x7sep", 
+            "Branch1": "3x3", 
+            "Branch2": "3x3", 
+            "Branch3": "7x7"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "5x5sep", 
+            "Branch2": "5x5", 
+            "Branch3": "7x7"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3", 
+            "Branch1": "7x7sep", 
+            "Branch2": "5x5", 
+            "Branch3": "7x7sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "5x5sep", 
+            "Branch2": "5x5sep", 
+            "Branch3": "3x3", 
+            "Branch4": "7x7"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7sep", 
+            "Branch1": "7x7sep", 
+            "Branch2": "5x5sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "5x5sep", 
+            "Branch2": "3x3", 
+            "Branch3": "7x7"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7sep", 
+            "Branch1": "3x3sep", 
+            "Branch2": "5x5", 
+            "Branch3": "7x7", 
+            "Branch4": "3x3", 
+            "Branch5": "3x3sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3sep", 
+            "Branch1": "3x3sep", 
+            "Branch2": "3x3sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3", 
+            "Branch1": "3x3", 
+            "Branch2": "5x5sep", 
+            "Branch3": "5x5sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7sep", 
+            "Branch1": "7x7", 
+            "Branch2": "5x5"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "5x5sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3", 
+            "Branch1": "7x7sep", 
+            "Branch2": "5x5sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7sep", 
+            "Branch1": "3x3sep", 
+            "Branch2": "7x7sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "3x3sep", 
+            "Branch2": "3x3", 
+            "Branch3": "3x3sep", 
+            "Branch4": "7x7sep", 
+            "Branch5": "5x5sep", 
+            "Branch6": "3x3sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3", 
+            "Branch1": "3x3sep", 
+            "Branch2": "5x5", 
+            "Branch3": "5x5", 
+            "Branch4": "3x3sep"
+        }, 
+        "outputs": 128
+    }, 
+    {
+        "widener": {}
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "7x7"
+        }, 
+        "outputs": 256
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "5x5sep", 
+            "Branch2": "3x3"
+        }, 
+        "outputs": 256
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "3x3"
+        }, 
+        "outputs": 256
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3sep", 
+            "Branch1": "5x5", 
+            "Branch2": "3x3"
+        }, 
+        "outputs": 256
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "3x3sep", 
+            "Branch2": "5x5"
+        }, 
+        "outputs": 256
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "5x5sep", 
+            "Branch2": "7x7sep", 
+            "Branch3": "5x5"
+        }, 
+        "outputs": 256
+    }, 
+    {
+        "widener": {}
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3sep", 
+            "Branch1": "5x5sep", 
+            "Branch2": "3x3", 
+            "Branch3": "3x3", 
+            "Branch4": "3x3sep", 
+            "Branch5": "7x7sep", 
+            "Branch6": "7x7sep"
+        }, 
+        "outputs": 512
+    }, 
+    {
+        "filters": {
+            "Branch0": "5x5", 
+            "Branch1": "3x3", 
+            "Branch2": "7x7", 
+            "Branch3": "5x5sep"
+        }, 
+        "outputs": 512
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "3x3"
+        }, 
+        "outputs": 512
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "3x3sep"
+        }, 
+        "outputs": 512
+    }, 
+    {
+        "widener": {}
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "7x7sep", 
+            "Branch2": "5x5sep", 
+            "Branch3": "7x7sep", 
+            "Branch4": "7x7"
+        }, 
+        "outputs": 1024
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7", 
+            "Branch1": "5x5sep", 
+            "Branch2": "5x5sep", 
+            "Branch3": "5x5sep"
+        }, 
+        "outputs": 1024
+    }, 
+    {
+        "filters": {
+            "Branch0": "7x7sep"
+        }, 
+        "outputs": 1024
+    }, 
+    {
+        "filters": {
+            "Branch0": "3x3sep", 
+            "Branch1": "7x7", 
+            "Branch2": "5x5sep", 
+            "Branch3": "5x5sep", 
+            "Branch4": "3x3sep"
+        }, 
+        "outputs": 1024
+    }
+]
+
+}
