@@ -21,9 +21,9 @@ If you publish work based on the Neural Architecture Constructor, please cite
 https://arxiv.org/abs/1803.06744v2
 
 Authors: 
-Utham Kamath utham at sigfind.com
-Abhishek Singh abhishs8 at cisco.com
-Debo Dutta dedutta at cisco.com
+- Utham Kamath utham at sigfind.com
+- Abhishek Singh abhishs8 at cisco.com
+- Debo Dutta dedutta at cisco.com
 
 ## Prerequisites: 
 
