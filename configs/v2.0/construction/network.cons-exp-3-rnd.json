@@ -1,0 +1,31 @@
+{
+"parameters": {
+        "archname":"cons-exp-3-rnd",
+        "mode":"construct",
+        "algorithm": "random",
+        "gpus":"[]",
+        "steps" : 10000,
+        "evalintval" : 1000,
+        "batchsize" : 50,
+        "dataset":"cifar10",
+        "iterations" : 10,
+        "image_size" : 28 
+},
+"random":{ "stages": 4,
+        "layersperstage": [15,6,4,4],
+        "numblocksperstage": [60, 17, 15, 15],
+        "parameterlimits": [false, false, false, false],
+        "blocks": ["3x3", "3x3sep", "5x5", "5x5sep", "7x7", "7x7sep"],
+        "skip": false
+},
+"initcell": {
+    "Layer0": {"Branch0": {"block": "conv2d", "kernel_size": [1, 1], "outputs": 128}},
+    "Layer2": {"Branch0": {"block": "lrn" }}
+},
+"classificationcell": {
+    "Layer0": {"Branch0": {"block": "reduce_mean", "size": [1, 2]}},
+    "Layer1": {"Branch0": {"block": "flatten", "size": [3, 3]}},
+    "Layer2": {"Branch0": {"block": "dropout", "keep_prob": 0.8}},
+    "Layer3": {"Branch0": {"block": "fc-final", "inputs": 192, "outputs": 10}}
+}
+}
